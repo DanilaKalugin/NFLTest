@@ -1,0 +1,253 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+stats-overview, .stats-overview {
+    position: relative;
+    padding: 20px 5px;
+    margin: 20px 5px;
+    width: 30vw;
+    max-width: 500px;
+}
+
+.nfl-wrapper {
+    display: flex;
+    width: 80%;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.conference-wrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 0.25%;
+    margin: 0.5%;
+    background: var(--conf-color);
+    box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.5);
+    width: 48.5%;
+    height: 100%;
+}
+
+.conference-name {
+    font-size: 2em;
+}
+
+.division-wrapper {
+    border-radius: 15px;
+    padding: 15px;
+    margin: 10px 10px;
+}
+
+.division-name {
+    display: block;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.division {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.team {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+.team:hover {
+    cursor: pointer;
+}
+
+.team-logo {
+    width: 90%;
+    height:90%;
+    margin:5%;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.team-name {
+    font-size: 1em;
+    display: none;
+    text-align: center;
+}
+
+.team:hover {
+    transition: 1s;
+    background-color: var(--team-color);
+    border-radius: 25px;
+}
+
+.team-container {
+    display: none;
+}
+
+.team-container.active {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.team-info-wrapper {
+    width: 60%;
+    border-radius: 15px;
+    box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+}
+
+.team-name-wrapper {
+    width: 40%;
+    max-width: 400px;
+    display: flex;
+    color: blanchedalmond;
+    padding: 5px;
+    border-radius: 15px 0 0 15px;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.close-btn {
+    background-color: brown;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    width: 100px;
+}
+
+.close-btn:hover {
+    cursor: pointer;
+}
+
+.team-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 100px);
+    grid-column-gap: 50px;
+    width: 100%;
+    background-color: white;
+    border-radius: 0 15px 15px 0;
+}
+
+.stat-name {
+    font-size: 18px;
+}
+
+.stat-value {
+    font-size: 1.5em;
+}
+
+.team-info-name {
+    font-size: 1.5em;
+    color: white;
+}
+
+.team-info-team-logo {
+    width: 100%;
+    height: 400px;
+    background-size: 250px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media (max-width: 1920px) {
+    body {
+        height: 100%;
+    }
+
+    .nfl-wrapper {
+        flex-direction: column;
+    }
+
+
+    .team-stats {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .team-info-team-logo {
+        height: 300px;
+        background-size: 150px;
+    }
+
+    .team-name-wrapper
+    {
+        width:35%;
+        max-width: 300px;
+        min-width: 0;
+    }
+
+    stats-overview {
+        width:100%;
+    }
+
+    .conference-wrapper {
+        width: 100%
+    }
+}
+
+@media (max-width: 1024px) {
+    .division {
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
+
+    .team {
+        width: 100%;
+        flex-direction: row;
+        margin: 0;
+    }
+
+    .team-logo {
+        width: 20%;
+    }
+
+    .team-name {
+        display: block;
+        text-align: left;
+        font-size: 2em;
+    }
+
+    .team:hover .team-name {
+        margin: 0;
+    }
+
+    .division-wrapper {
+        padding: 0;
+        margin: 0;
+    }
+
+    .team-info-wrapper {
+        flex-direction: column;
+    }
+
+    .team-name-wrapper {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 15px 15px 0px 0px;
+        padding: 0;
+    }
+
+    .team-stats {
+        border-radius: 0 0 15px 15px;
+    }
+
+    .team-info-team-logo {
+        background-size: 250px;
+    }
+}
