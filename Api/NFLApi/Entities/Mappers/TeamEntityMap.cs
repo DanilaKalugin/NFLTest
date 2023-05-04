@@ -22,20 +22,17 @@ public class TeamEntityMap: IEntityTypeConfiguration<Team>
             .HasMaxLength(35)
             .IsRequired();
 
-        builder.Property(t => t.DivisionID)
-            .HasColumnName("TeamDivision")
-            .IsRequired();
-
         builder.HasOne(t => t.Stadium)
             .WithMany(s => s.Teams)
             .HasForeignKey(t => t.StadiumId)
             .OnDelete(DeleteBehavior.Cascade)
             .IsRequired();
 
-        builder.HasOne(t => t.Division)
-            .WithMany(d => d.Teams)
-            .HasForeignKey(t => t.DivisionID)
+        builder.HasOne(t => t.Conference)
+            .WithMany(c => c.Teams)
+            .HasForeignKey(t => t.ConferenceId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
+
     }
 }

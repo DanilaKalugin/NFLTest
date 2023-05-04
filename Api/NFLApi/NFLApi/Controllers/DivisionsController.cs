@@ -1,5 +1,4 @@
 ﻿using Entities.Tables;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NCAA.BLL;
 
@@ -18,11 +17,11 @@ namespace NFLApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet("{conferenceNumber}")]
-        [HttpOptions]
-        public async Task<IEnumerable<Division>> Get(byte conferenceNumber)
+        
+        [HttpGet]
+        public async Task<IEnumerable<NationalDivision>> GetAllConferences()
         {
-            var res = await _teamsBl.GetDivisionsFromConference(conferenceNumber)
+            var res = await _teamsBl.GetConferencesAsync()
                 .ConfigureAwait(false);
             return res;
         }

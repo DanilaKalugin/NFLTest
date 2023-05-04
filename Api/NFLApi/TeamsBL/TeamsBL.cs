@@ -7,9 +7,9 @@ namespace NCAA.BLL
     {
         private readonly NFLDAO _nflDao = new();
 
-        public async Task<List<Team>> GetTeamsFromDivisionAsync(byte division)
+        public async Task<List<Team>> GetTeamsFromConferenceAsync(byte division)
         {
-            var teams = await _nflDao.GetTeamsFromDivisionAsync(division)
+            var teams = await _nflDao.GetTeamsFromConferenceAsync(division)
                 .ConfigureAwait(false);
             return teams.OrderBy(t => t.TeamRank).ToList();
         }
@@ -18,12 +18,25 @@ namespace NCAA.BLL
             await _nflDao.GetTeam(team)
                 .ConfigureAwait(false);
 
-        public async Task<List<Conference>> GetConferencesAsync() =>
-            await _nflDao.GetAllConferences()
+        public async Task<List<NationalDivision>> GetConferencesAsync()
+        {
+            return await _nflDao.GetAllConferences()
+                .ConfigureAwait(false);
+        }
+
+        public async Task<List<State>> GetStatesAsync() =>
+            await _nflDao.GetStatesAsync()
                 .ConfigureAwait(false);
 
-        public async Task<List<Division>> GetDivisionsFromConference(byte conferenceNumber) =>
-            await _nflDao.GetDivisionsFromConference(conferenceNumber)
+        public async Task<Conference?> GetConferenceByIdAsync(byte conferenceId) =>
+            await _nflDao.GetConferenceById(conferenceId)
                 .ConfigureAwait(false);
+
+        public async Task<State?> GetStateByStateCodeAsync(string stateCode) =>
+            await _nflDao.GetStateById(stateCode)
+                .ConfigureAwait(false);
+
+        public async Task<List<Team>> GetTeamsFromStateAsync(string stateCode) =>
+            await _nflDao.GetTeamsFromState(stateCode);
     }
 }

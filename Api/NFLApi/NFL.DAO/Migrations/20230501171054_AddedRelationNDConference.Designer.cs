@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NFL.DAO;
 
@@ -11,9 +12,10 @@ using NFL.DAO;
 namespace NFL.DAO.Migrations
 {
     [DbContext(typeof(NFLApplicationContext))]
-    partial class NFLApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230501171054_AddedRelationNDConference")]
+    partial class AddedRelationNDConference
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,6 +73,28 @@ namespace NFL.DAO.Migrations
                     b.HasIndex("ConferenceLevel");
 
                     b.ToTable("Conferences", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.Tables.Division", b =>
+                {
+                    b.Property<byte>("Number")
+                        .HasColumnType("tinyint")
+                        .HasColumnName("DivisionNumber");
+
+                    b.Property<byte?>("ConferenceId")
+                        .IsRequired()
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("DivisionTitle")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.HasKey("Number");
+
+                    b.HasIndex("ConferenceId");
+
+                    b.ToTable("Divisions", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Tables.NationalDivision", b =>
@@ -137,8 +161,9 @@ namespace NFL.DAO.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte>("ConferenceId")
-                        .HasColumnType("tinyint");
+                    b.Property<byte>("DivisionID")
+                        .HasColumnType("tinyint")
+                        .HasColumnName("TeamDivision");
 
                     b.Property<short>("StadiumId")
                         .HasColumnType("smallint");
@@ -158,7 +183,7 @@ namespace NFL.DAO.Migrations
 
                     b.HasKey("TeamAbbreviation");
 
-                    b.HasIndex("ConferenceId");
+                    b.HasIndex("DivisionID");
 
                     b.HasIndex("StadiumId");
 
@@ -203,6 +228,16 @@ namespace NFL.DAO.Migrations
                     b.Navigation("Division");
                 });
 
+            modelBuilder.Entity("Entities.Tables.Division", b =>
+                {
+                    b.HasOne("Entities.Tables.Conference", "Conference")
+                        .WithMany("Divisions")
+                        .HasForeignKey("ConferenceId")
+                        .IsRequired();
+
+                    b.Navigation("Conference");
+                });
+
             modelBuilder.Entity("Entities.Tables.Stadium", b =>
                 {
                     b.HasOne("Entities.Tables.City", "StadiumLocation")
@@ -216,9 +251,9 @@ namespace NFL.DAO.Migrations
 
             modelBuilder.Entity("Entities.Tables.Team", b =>
                 {
-                    b.HasOne("Entities.Tables.Conference", "Conference")
+                    b.HasOne("Entities.Tables.Division", "Division")
                         .WithMany("Teams")
-                        .HasForeignKey("ConferenceId")
+                        .HasForeignKey("DivisionID")
                         .IsRequired();
 
                     b.HasOne("Entities.Tables.Stadium", "Stadium")
@@ -227,7 +262,7 @@ namespace NFL.DAO.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Conference");
+                    b.Navigation("Division");
 
                     b.Navigation("Stadium");
                 });
@@ -249,6 +284,11 @@ namespace NFL.DAO.Migrations
                 });
 
             modelBuilder.Entity("Entities.Tables.Conference", b =>
+                {
+                    b.Navigation("Divisions");
+                });
+
+            modelBuilder.Entity("Entities.Tables.Division", b =>
                 {
                     b.Navigation("Teams");
                 });

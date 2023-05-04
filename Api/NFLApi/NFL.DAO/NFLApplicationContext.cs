@@ -5,9 +5,10 @@ namespace NFL.DAO
 {
     public class NFLApplicationContext : DbContext
     {
-        public DbSet<Team> Teams { get; set; }
-        public DbSet<Conference> Conferences { get; set; }
-        public DbSet<Division> Divisions { get; set; }
+        public DbSet<Team>? Teams { get; set; }
+        public DbSet<Conference>? Conferences { get; set; }
+        public DbSet<State>? States { get; set; }
+        public DbSet<NationalDivision> Divisions1 { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -19,10 +20,10 @@ namespace NFL.DAO
             builder.ApplyConfiguration(new Entities.Mappers.StateEntityMap());
             builder.ApplyConfiguration(new Entities.Mappers.CityEntityMap());
             builder.ApplyConfiguration(new Entities.Mappers.ConferenceEntityMap());
-            builder.ApplyConfiguration(new Entities.Mappers.DivisionEntityMap());
             builder.ApplyConfiguration(new Entities.Mappers.StadiumEntityMap());
             builder.ApplyConfiguration(new Entities.Mappers.TeamEntityMap());
             builder.ApplyConfiguration(new Entities.Mappers.TeamColorEntityMap());
+            builder.ApplyConfiguration(new Entities.Mappers.NationalDivisionEntityMap());
         }
     }
 }

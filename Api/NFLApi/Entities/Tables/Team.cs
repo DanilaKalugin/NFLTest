@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Entities.Tables
 {
@@ -11,9 +10,9 @@ namespace Entities.Tables
         public Stadium Stadium { get; set; }
         [JsonIgnore]
         public byte StadiumId { get; set; }
-        public Division Division { get; set; }
+        public byte ConferenceId { get; set; }
         [JsonIgnore]
-        public byte DivisionID { get; set; }
+        public Conference Conference { get; set; }
         public string Coach { get; set; }
         public short? TeamRank { get; set; }
         public virtual List<TeamColor> Colors { get; set; } = new();

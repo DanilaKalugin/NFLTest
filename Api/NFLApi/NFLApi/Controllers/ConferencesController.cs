@@ -1,5 +1,4 @@
 ﻿using Entities.Tables;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NCAA.BLL;
 
@@ -18,13 +17,12 @@ namespace NFLApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("{conferenceId}")]
         [HttpOptions]
-        public async Task<IEnumerable<Conference>> Get()
+        public async Task<Conference?> GetConferenceById(byte conferenceId)
         {
-            var res = await _teamsBl.GetConferencesAsync()
+            return await _teamsBl.GetConferenceByIdAsync(conferenceId)
                 .ConfigureAwait(false);
-            return res;
         }
     }
 }

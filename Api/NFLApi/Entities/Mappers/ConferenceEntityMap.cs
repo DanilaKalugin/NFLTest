@@ -20,5 +20,10 @@ public class ConferenceEntityMap: IEntityTypeConfiguration<Conference>
         builder.Property(c => c.ConferenceColor)
             .HasMaxLength(7)
             .IsRequired();
+
+        
+        builder.HasOne(c => c.Division)
+            .WithMany(d => d.Conferences)
+            .HasForeignKey(c => c.ConferenceLevel);
     }
 }

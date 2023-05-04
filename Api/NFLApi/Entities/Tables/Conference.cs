@@ -7,5 +7,10 @@ public class Conference
     public byte ConferenceId { get; set; }
     public string ConferenceName { get; set; }
     public string ConferenceColor { get; set; }
-    public virtual List<Division> Divisions { get; set; } = new();
+    [JsonIgnore]
+    public byte? ConferenceLevel { get; set; }
+    [JsonIgnore]
+    public NationalDivision Division { get; set; }
+
+    public virtual List<Team> Teams { get; set; } = new();
 }

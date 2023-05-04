@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NFL.DAO;
 
@@ -11,9 +12,10 @@ using NFL.DAO;
 namespace NFL.DAO.Migrations
 {
     [DbContext(typeof(NFLApplicationContext))]
-    partial class NFLApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230502124916_Removed-Entity-Division")]
+    partial class RemovedEntityDivision
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
