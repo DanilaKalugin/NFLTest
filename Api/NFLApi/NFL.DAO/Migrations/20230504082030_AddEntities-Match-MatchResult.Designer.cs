@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NFL.DAO;
 
@@ -11,9 +12,10 @@ using NFL.DAO;
 namespace NFL.DAO.Migrations
 {
     [DbContext(typeof(NFLApplicationContext))]
-    partial class NFLApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230504082030_AddEntities-Match-MatchResult")]
+    partial class AddEntitiesMatchMatchResult
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,60 +160,6 @@ namespace NFL.DAO.Migrations
                     b.ToTable("NationalDivisions", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.Tables.SocialNetworkAccount", b =>
-                {
-                    b.Property<string>("TeamAbbreviation")
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<byte>("AccountTypeId")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("AccountAddress")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("TeamAbbreviation", "AccountTypeId");
-
-                    b.HasIndex("AccountTypeId");
-
-                    b.ToTable("SocialNetworkAccounts", (string)null);
-                });
-
-            modelBuilder.Entity("Entities.Tables.SocialNetworkAccountType", b =>
-                {
-                    b.Property<byte>("Id")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.HasAlternateKey("Description");
-
-                    b.ToTable("SocialNetworkAccountTypes", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = (byte)1,
-                            Description = "TeamSite"
-                        },
-                        new
-                        {
-                            Id = (byte)2,
-                            Description = "TwitterAccount"
-                        },
-                        new
-                        {
-                            Id = (byte)3,
-                            Description = "FacebookPage"
-                        });
-                });
-
             modelBuilder.Entity("Entities.Tables.Stadium", b =>
                 {
                     b.Property<short>("StadiumId")
@@ -307,21 +255,6 @@ namespace NFL.DAO.Migrations
                     b.ToTable("teamColors", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.Views.TeamStandings", b =>
-                {
-                    b.Property<int>("L")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TeamAbbreviation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("W")
-                        .HasColumnType("int");
-
-                    b.ToView("TeamStandings");
-                });
-
             modelBuilder.Entity("Entities.Tables.City", b =>
                 {
                     b.HasOne("Entities.Tables.State", "CityState")
@@ -396,25 +329,6 @@ namespace NFL.DAO.Migrations
                     b.Navigation("MatchWinner");
                 });
 
-            modelBuilder.Entity("Entities.Tables.SocialNetworkAccount", b =>
-                {
-                    b.HasOne("Entities.Tables.SocialNetworkAccountType", "AccountType")
-                        .WithMany("Accounts")
-                        .HasForeignKey("AccountTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Tables.Team", "Team")
-                        .WithMany("SocialNetworkAccounts")
-                        .HasForeignKey("TeamAbbreviation")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AccountType");
-
-                    b.Navigation("Team");
-                });
-
             modelBuilder.Entity("Entities.Tables.Stadium", b =>
                 {
                     b.HasOne("Entities.Tables.City", "StadiumLocation")
@@ -476,11 +390,6 @@ namespace NFL.DAO.Migrations
                     b.Navigation("Conferences");
                 });
 
-            modelBuilder.Entity("Entities.Tables.SocialNetworkAccountType", b =>
-                {
-                    b.Navigation("Accounts");
-                });
-
             modelBuilder.Entity("Entities.Tables.Stadium", b =>
                 {
                     b.Navigation("MatchesPlayedInThisStadium");
@@ -504,8 +413,6 @@ namespace NFL.DAO.Migrations
                     b.Navigation("MatchLosers");
 
                     b.Navigation("MatchWinners");
-
-                    b.Navigation("SocialNetworkAccounts");
                 });
 #pragma warning restore 612, 618
         }

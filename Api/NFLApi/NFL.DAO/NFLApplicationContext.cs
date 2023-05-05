@@ -1,4 +1,5 @@
 ﻿using Entities.Tables;
+using Entities.Views;
 using Microsoft.EntityFrameworkCore;
 
 namespace NFL.DAO
@@ -8,7 +9,8 @@ namespace NFL.DAO
         public DbSet<Team>? Teams { get; set; }
         public DbSet<Conference>? Conferences { get; set; }
         public DbSet<State>? States { get; set; }
-        public DbSet<NationalDivision> Divisions1 { get; set; }
+        public DbSet<NationalDivision> Divisions { get; set; }
+        public DbSet<TeamStandings> TeamStandings { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -24,6 +26,12 @@ namespace NFL.DAO
             builder.ApplyConfiguration(new Entities.Mappers.TeamEntityMap());
             builder.ApplyConfiguration(new Entities.Mappers.TeamColorEntityMap());
             builder.ApplyConfiguration(new Entities.Mappers.NationalDivisionEntityMap());
+            builder.ApplyConfiguration(new Entities.Mappers.MatchEntityMap());
+            builder.ApplyConfiguration(new Entities.Mappers.MatchResultEntityMap());
+            builder.ApplyConfiguration(new Entities.Mappers.SocialNetworkAccountTypeEntityMap());
+            builder.ApplyConfiguration(new Entities.Mappers.SocialNetworkAccountEntityMap());
+
+            builder.ApplyConfiguration(new Entities.Mappers.TeamStandingsViewMap());
         }
     }
 }
