@@ -1,3 +1,6 @@
+using NCAA.BLL;
+using NFL.DAO;
+
 namespace NFLApi
 {
     public class Program
@@ -12,6 +15,16 @@ namespace NFLApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddTransient<DivisionsDAO>();
+            builder.Services.AddTransient<TeamsDAO>();
+            builder.Services.AddTransient<ConferencesDAO>();
+            builder.Services.AddTransient<StatesDAO>();
+
+            builder.Services.AddTransient<TeamsBL>();
+            builder.Services.AddTransient<ConferencesBL>();
+            builder.Services.AddTransient<DivisionsBL>();
+            builder.Services.AddTransient<StatesBL>();
 
             var app = builder.Build();
 
