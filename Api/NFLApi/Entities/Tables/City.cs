@@ -11,5 +11,7 @@ namespace Entities.Tables
         public State CityState { get; set; }
         [JsonIgnore] 
         public virtual List<Stadium> Stadiums { get; set; } = new();
+
+        public string CityLocation => $"{CityTitle}, {CityStateId}";
     }
 }

@@ -11,6 +11,6 @@ public class Conference
     public byte? ConferenceLevel { get; set; }
     [JsonIgnore]
     public NationalDivision Division { get; set; }
-
+    [JsonIgnore]
     public virtual List<Team> Teams { get; set; } = new();
 }
