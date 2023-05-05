@@ -8,22 +8,18 @@ namespace NFLApi.Controllers
     [ApiController]
     public class DivisionsController : ControllerBase
     {
-        private readonly TeamsBL _teamsBl = new();
-
+        private readonly DivisionsBL _divisionsBl;
         private readonly ILogger<DivisionsController> _logger;
 
-        public DivisionsController(ILogger<DivisionsController> logger)
+        public DivisionsController(ILogger<DivisionsController> logger, DivisionsBL divisionsBl)
         {
             _logger = logger;
+            _divisionsBl = divisionsBl;
         }
 
-        
-        [HttpGet]
-        public async Task<IEnumerable<NationalDivision>> GetAllConferences()
-        {
-            var res = await _teamsBl.GetConferencesAsync()
+        [HttpGet, Route("", Name="3")]
+        public async Task<IEnumerable<NationalDivision>> GetAllConferences() =>
+            await _divisionsBl.GetConferencesAsync()
                 .ConfigureAwait(false);
-            return res;
-        }
     }
 }
