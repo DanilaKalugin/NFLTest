@@ -11,5 +11,7 @@ namespace Entities.Tables
         public short StadiumLocationId { get; set; }
         [JsonIgnore]
         public virtual List<Team> Teams { get; set; } = new();
+        [JsonIgnore]
+        public virtual List<Match> MatchesPlayedInThisStadium { get; set; } = new();
     }
 }
