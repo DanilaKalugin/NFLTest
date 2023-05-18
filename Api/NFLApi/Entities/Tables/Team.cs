@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Entities.Tables
+﻿namespace Entities.Tables
 {
     public class Team
     {
@@ -8,7 +6,7 @@ namespace Entities.Tables
         public string TeamRegion { get; set; }
         public string TeamName { get; set; }
         public Stadium Stadium { get; set; }
-        public byte StadiumId { get; set; }
+        public short StadiumId { get; set; }
         public byte ConferenceId { get; set; }
         public Conference Conference { get; set; }
         public string Coach { get; set; }
@@ -20,5 +18,7 @@ namespace Entities.Tables
         public virtual List<MatchResult> MatchWinners { get; set; } = new();
         public virtual List<MatchResult> MatchLosers { get; set; } = new();
         public virtual List<SocialNetworkAccount> SocialNetworkAccounts { get; set; } = new();
+        public virtual List<User> Users { get; set; } = new();
+        public virtual List<PlayerInTeam> Players { get; set; } = new();
     }
 }

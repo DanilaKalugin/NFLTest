@@ -43,5 +43,9 @@ public class MatchEntityMap : IEntityTypeConfiguration<Match>
 
         builder.Property(m => m.StadiumId)
             .HasColumnName("Stadium");
+
+        builder.Property(m => m.IsPlayed)
+            .HasDefaultValue(false)
+            .IsRequired();
     }
 }

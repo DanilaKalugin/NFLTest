@@ -1,0 +1,24 @@
+version: '3.4'
+
+
+services:
+  db:
+    container_name: app-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+        - 8002:1433
+    environment:
+        ACCEPT_EULA: "Y"
+        SA_PASSWORD: "S3cur3P@ssW0rd!"
+  courseworkapi:
+    container_name: coursework-api
+    image: ${DOCKER_REGISTRY-}courseworkapi
+    build:
+      context: .
+      dockerfile: BasketballCourseworkAPI/Dockerfile
+    restart: always
+    ports:
+        - 8001:80
+        - 8003:443
+    depends_on:
+        - db

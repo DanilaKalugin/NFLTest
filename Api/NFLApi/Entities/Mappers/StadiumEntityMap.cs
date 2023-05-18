@@ -29,5 +29,11 @@ public class StadiumEntityMap:IEntityTypeConfiguration<Stadium>
             .HasForeignKey(s => s.StadiumLocationId)
             .OnDelete(DeleteBehavior.Cascade)
             .IsRequired();
+
+        builder.Property(s => s.StadiumCapacity)
+            .IsRequired();
+
+        builder.Property(s => s.StadiumOpeningYear)
+            .IsRequired();
     }
 }

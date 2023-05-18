@@ -11,6 +11,6 @@ namespace Entities.AbstractClasses
         public string AwayTeamCode { get; set; }
         public DateTime MatchDate { get; set; }
         public Stadium Stadium { get; set; }
-        public byte StadiumId { get; set; }
+        public short StadiumId { get; set; }
     }
 }
